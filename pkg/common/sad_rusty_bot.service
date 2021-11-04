@@ -1,0 +1,17 @@
+[Unit]
+Description=Sed substitution Telegram bot
+Wants=network-online.target
+After=network.target nss-lookup.target network-online.target
+
+[Service]
+EnvironmentFile=/etc/sad_rusty_bot.env
+ExecStart=/usr/bin/sad_rusty_bot
+User=sad_rusty_bot
+Group=sad_rusty_bot
+StandardOutput=journal
+Restart=on-failure
+KillSignal=SIGINT
+
+
+[Install]
+WantedBy=multi-user.target
