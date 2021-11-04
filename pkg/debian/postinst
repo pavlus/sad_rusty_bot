@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+USER="sad_rusty_bot"
+
+if [ "$1" = "configure" ] ; then
+  adduser --system "$USER" --no-create-home --group
+fi
+
+#DEBHELPER#

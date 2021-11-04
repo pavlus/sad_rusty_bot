@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Sed substitution bot for Telegram"
 authors = ["Pavel Remygailo <pavel.remygailo+github@gmail.com>"]
 edition = "2021"
+repository = "https://github.com/pavlus/sad_rusty_bot"
+keywords = ["telegram", "sed", "bot"]
+license = "GPL-3.0"
+exclude = ["pkg/*"]
 
 [dependencies]
 sedregex = "0.2.4"
@@ -17,4 +21,16 @@ tokio = { version = "1.13", features = ["rt-multi-thread", "macros"] }
 
 [profile.release]
 lto = true
+panic = "abort"
 
+[package.metadata.deb]
+name = "sad-rusty-bot"
+priority = "optional"
+section = "net"
+license-file = ["LICENSE", "0"]
+maintainer-scripts = "pkg/debian/"
+systemd-units = { unit-name = "sad-rusty-bot", unit-scripts = "pkg/common", enable = false }
+assets = [
+    ["target/release/sad_rusty_bot", "/usr/bin/sad_rusty_bot", "755"],
+    ["defaults/sad_rusty_bot.env", "/etc/sad_rusty_bot.env", "644"]
+]

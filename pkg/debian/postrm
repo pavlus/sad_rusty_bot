@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+CONF="/etc/sad_rusty_bot.env"
+
+if [ "$1" = "purge" ] ; then
+  if [ -f $CONFq ] ; then
+    rm "$CONF"
+  fi
+fi
+
+#DEBHELPER#
