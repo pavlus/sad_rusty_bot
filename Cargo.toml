@@ -1,0 +1,18 @@
+[package]
+name = "sad_rusty_bot"
+version = "0.1.0"
+description = "Sed substitution bot for Telegram"
+authors = ["Pavel Remygailo <pavel.remygailo+github@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+sedregex = "0.2.4"
+teloxide = "0.5.3"
+log = "0.4"
+pretty_env_logger = "0.4"
+tokio = { version = "1.13", features = ["rt-multi-thread", "macros"] }
+
+
+[profile.release]
+lto = true
+
