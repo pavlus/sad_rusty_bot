@@ -11,12 +11,13 @@ jobs:
       - name: BuildDeb
         id: debbuild
         uses: ebbflow-io/cargo-deb-amd64-ubuntu@1.0
+        with:
+          cmd: cargo deb
       - name: Upload Deb Artifact
         uses: actions/upload-artifact@v2
         with:
           name: amd64deb
           path: ./target/x86_64-unknown-linux-amd64/debian/*
-          cmd: cargo deb
   raspbianbuild:
     runs-on: ubuntu-latest
     name: Armv7Deb
@@ -25,6 +26,8 @@ jobs:
       - name: BuildDeb
         id: debbuild
         uses: ebbflow-io/cargo-deb-armv7-debian@1.0
+        with:
+          cmd: cargo deb
       - name: Upload Deb Artifact
         uses: actions/upload-artifact@v2
         with:
