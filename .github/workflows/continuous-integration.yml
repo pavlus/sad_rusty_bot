@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 #    needs: [ check ]
     strategy:
-      #fail-fast: true
+      fail-fast: false
       matrix:
         target:
           - value: "x86_64-unknown-linux-gnu"

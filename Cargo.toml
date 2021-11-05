@@ -19,10 +19,6 @@ pretty_env_logger = "0.4"
 tokio = { version = "1.13", features = ["rt-multi-thread", "macros"] }
 
 
-[target.x86_64-unknown-linux-musl.dependencies]
-openssl = { version = '0.10', features = ["vendored"] }
-
-
 [profile.release]
 lto = true
 panic = "abort"
@@ -39,3 +35,10 @@ assets = [
     ["target/release/sad_rusty_bot", "/usr/bin/sad_rusty_bot", "755"],
     ["defaults/sad_rusty_bot.env", "/etc/sad_rusty_bot.env", "644"]
 ]
+
+
+[target.x86_64-unknown-linux-musl.dependencies]
+openssl = { version = '0.10', features = ["vendored"] }
+
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
