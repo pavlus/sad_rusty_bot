@@ -27,24 +27,30 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ check ]
     strategy:
-      fail-fast: true
+      #fail-fast: true
       matrix:
         target:
-          - "x86_64-unknown-linux-gnu"
-          - "x86_64-unknown-linux-musl"
-          - "armv7-unknown-linux-gnueabihf"
+          - value: "x86_64-unknown-linux-gnu"
+            deps: ""
+          - value: "x86_64-unknown-linux-musl"
+            deps: "musl-tools"
+          - value: "armv7-unknown-linux-gnueabihf"
+            deps: "gcc-arm-linux-gnueabihf"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          target: ${{ matrix.target }}
+          target: ${{ matrix.target.value }}
           override: true
+      - name: "Install build dependencies"
+        if: "${{ matrix.target.deps != '' }}"
+        run: "apt-get --assume-yes install ${{ matrix.target.deps }}"
       - uses: actions-rs/cargo@v1
         with:
           use-cross: true
           command: build
-          args: --release --target=${{ matrix.target }}
+          args: --release --target=${{ matrix.target.value }}
       - run: cargo install cargo-deb
-      - run: cargo deb --target=${{ matrix.target }}
+      - run: cargo deb --target=${{ matrix.target.value }}
 
