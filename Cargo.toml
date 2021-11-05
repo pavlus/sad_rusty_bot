@@ -9,19 +9,24 @@ keywords = ["telegram", "sed", "bot"]
 license = "GPL-3.0"
 exclude = ["pkg/*"]
 
+
 [dependencies]
 sedregex = "0.2.4"
 regex = "^1"
-
 teloxide = "0.5.3"
 log = "0.4"
 pretty_env_logger = "0.4"
 tokio = { version = "1.13", features = ["rt-multi-thread", "macros"] }
 
 
+[target.x86_64-unknown-linux-musl.dependencies]
+openssl = { version = '0.10', features = ["vendored"] }
+
+
 [profile.release]
 lto = true
 panic = "abort"
+
 
 [package.metadata.deb]
 name = "sad-rusty-bot"
